@@ -1,3 +1,5 @@
 .hive-metastore
 .spark-warehouse
 dbt-env
+logs
+tutorial_spark
