@@ -1,2 +1,3 @@
 .hive-metastore
 .spark-warehouse
+dbt-env
