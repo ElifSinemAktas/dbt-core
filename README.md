@@ -1,6 +1,6 @@
-# dbt_core
+# dbt Core
 
-DBT (Data Build Tool) is a popular open-source command-line tool that's used for orchestrating and managing the transformation and modeling of data in your data warehouse. It's particularly well-suited for data analytics teams that work with SQL-based transformations in data warehousing environments. Here are some reasons why you might consider using DBT in your data workflows:
+dbt Core is a popular open-source command-line tool that's used for orchestrating and managing the transformation and modeling of data in your data warehouse. It's particularly well-suited for data analytics teams that work with SQL-based transformations in data warehousing environments. Here are some reasons why you might consider using DBT in your data workflows:
 
 - Modularity and Reusability
 - Version Control
@@ -12,7 +12,6 @@ DBT (Data Build Tool) is a popular open-source command-line tool that's used for
 - Data Lineage
 - Elastic Compute Scaling
 - Community and Ecosystem
-
 
 ## 1. Prerequisites
 - Python 3.10 (Version 3.8 or higher is suitable) 
