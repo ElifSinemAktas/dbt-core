@@ -22,16 +22,21 @@ In this repo we will discover dbt Core with Apache Spark
 
 ## Steps
 
-- Create Spark Trift Server using Docker
+- Create Spark Trift Server using Docker and Run
 - Copy csv files to docker container
-- Connect Spark container bash
-<!-- - Create venv
-- Install dbt -->
-- Connect using beeline to set up tables for Spark-SQL
+- Connect Spark container 
+- Run Beeline and Connect Hive
 - Create tables using csv files
+- Create venv in your local machine
+- Install dbt
+- Initilize and configure dbt
+- Check configuration using debug
+- Create sql and yml files for transformation
+- Run dbt
+- Create dbeaver connection and check the data easily
 
 
-## Run Spark Thrift Server
+## Create Spark Trift Server using Docker and Run
 
 [This docker-compose](https://github.com/ElifSinemAktas/dbt_core/blob/main/docker-compose.yaml) starts a Spark Thrift server and a Postgres database as a Hive Metastore backend.
 
@@ -64,12 +69,12 @@ docker cp raw_orders.csv *container_id*:/opt
 docker cp raw_payments.csv *container_id*:/opt
 ```
 
-### Connect Spark Container
+## Connect Spark Container
 ```shell
 docker-exec -it <container_id> bash
 ```
 
-### Run Beeline and Connect Hive
+## Run Beeline and Connect Hive
 ```shell
 /usr/spark/bin/beeline
 ```
@@ -95,7 +100,7 @@ Transaction isolation: TRANSACTION_REPEATABLE_READ
 0: jdbc:hive2://localhost:10000>
 ```
 
-### 2.3.2 Create tables with data
+## Create tables using csv files
 ```shell
 CREATE TABLE default.raw_customers (
     id int,
@@ -156,7 +161,7 @@ dbt init tutorial_spark
 
 After configuration, a folder system will be created.
 
-## Check if configuration is okay
+## Check configuration using debug
 ```shell
 cd tutorial_spark
 ```
@@ -166,7 +171,7 @@ cd dbt debug
 
 ![dbt_debug_1](images/dbt_debug_1.png)
 
-## Create files for transformation
+## Create sql and yml files for transformation
 
 Visit https://github.com/dbt-labs/jaffle_shop and get the "models" folder from there and copy the files into your **tutorial_spark/models** folder.
 
@@ -180,6 +185,9 @@ dbt run
 ![dbt_run_1](./images/dbt_run_1.png)
 
 ## Create dbeaver connection and check the data easily
+
+Download Dbeaver https://dbeaver.io/download/
+
 ![dbeaver_1](./images/dbeaver_1.png)
 
 ![dbeaver_2](./images/dbeaver_2.png)
