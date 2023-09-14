@@ -79,7 +79,7 @@ docker-exec -it <container_id> bash
 ```
 
 Example Output:
-```commandline
+```
 root@0594d2d79ef6:/# /usr/spark/bin/beeline
 log4j:WARN No appenders could be found for logger (org.apache.hadoop.util.Shell).
 log4j:WARN Please initialize the log4j system properly.
@@ -101,33 +101,36 @@ CREATE TABLE default.raw_customers (
     id int,
     first_name string,
     last_name string
-    ) USING CSV
+    ) 
+USING CSV
 OPTIONS (path "/opt/raw_customers.csv",
         delimiter ",",
         header "true");
 
-CREATE TABLE default.raw_orders (id int,
-user_id int,
-order_date date,
-status string
-)
+CREATE TABLE default.raw_orders (
+    id int,
+    user_id int,
+    order_date date,
+    status string
+    )
 USING CSV
 OPTIONS (path "/opt/raw_orders.csv",
         delimiter ",",
         header "true");
 
-CREATE TABLE default.raw_payments (id int,
-user_id int,
-payment_method string,
-amount bigint
-)
+CREATE TABLE default.raw_payments (
+    id int,
+    order_id int,
+    payment_method string,
+    amount bigint
+    )
 USING CSV
 OPTIONS (path "/opt/raw_payments.csv",
         delimiter ",",
         header "true");
 ```
 
-## Create venv 
+## Create venv in your local machine
 
 ```shell
 python3 -m venv dbt-env
@@ -140,7 +143,6 @@ source dbt-env/bin/activate
 ```shell
 pip install "dbt-spark[PyHive]"
 ```
-
 Note: sasl installation can be problem when installing the package.
 If you are using linux you can follow the steps [here](https://stackoverflow.com/questions/70347149/installing-sasl-in-python).
 
@@ -164,9 +166,32 @@ cd dbt debug
 
 ![dbt_debug_1](images/dbt_debug_1.png)
 
+## Create files for transformation
+
+Visit https://github.com/dbt-labs/jaffle_shop and get the "models" folder from there and copy the files into your **tutorial_spark/models** folder.
+
+![models_1](./images/models_1.png)
+
+## Run dbt
+
+```shell
+dbt run
+```
+![dbt_run_1](./images/dbt_run_1.png)
+
+## Create dbeaver connection and check the data easily
+![dbeaver_1](./images/dbeaver_1.png)
+
+![dbeaver_2](./images/dbeaver_2.png)
+
+![dbeaver_3](./images/dbeaver_3.png)
+
+
 # Resources
-- Docker Compose: https://github.com/dbt-labs/dbt-spark
-- Understanding Spark-SQL: https://spark.apache.org/docs/3.1.1/sql-distributed-sql-engine.html
+- What is dbt?: https://docs.getdbt.com/docs/introduction
 - Apache Spark Setup for dbt: https://docs.getdbt.com/docs/core/connect-data-platform/spark-setup
+- Configuration and Properties of dbt: https://docs.getdbt.com/reference/configs-and-properties
+- Docker compose file source: https://github.com/dbt-labs/dbt-spark
+- Understanding Spark-SQL: https://spark.apache.org/docs/3.1.1/sql-distributed-sql-engine.html
 - Data Source: https://github.com/dbt-labs/jaffle_shop
 - Solving csv header problem: https://kb.databricks.com/sql/query-not-skip-header-ext-table
