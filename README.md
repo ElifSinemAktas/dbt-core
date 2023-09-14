@@ -22,10 +22,10 @@ In this repo we will discover dbt Core with Apache Spark
 
 ## Steps
 
-- Create Spark Trift Server using Docker and Run
+- Create Spark Trift Server using Docker and run
 - Copy csv files to docker container
 - Connect Spark container 
-- Run Beeline and Connect Hive
+- Run beeline and connect hive
 - Create tables using csv files
 - Create venv in your local machine
 - Install dbt
@@ -36,7 +36,7 @@ In this repo we will discover dbt Core with Apache Spark
 - Create dbeaver connection and check the data easily
 
 
-## Create Spark Trift Server using Docker and Run
+### Create Spark Trift Server using Docker and run
 
 [This docker-compose](https://github.com/ElifSinemAktas/dbt_core/blob/main/docker-compose.yaml) starts a Spark Thrift server and a Postgres database as a Hive Metastore backend.
 
@@ -52,7 +52,7 @@ CONTAINER ID   IMAGE                      COMMAND                  CREATED      
 ef7fb9edd3aa   postgres:9.6.17-alpine     "docker-entrypoint.s…"   3 weeks ago   Up 3 hours   0.0.0.0:5433->5432/tcp                             dbt_core-dbt-hive-metastore-1
 ```
 
-## Copy csv files to docker container
+### Copy csv files to docker container
 
 Change "your_path" and "container_id" as your info.
 
@@ -69,12 +69,12 @@ docker cp raw_orders.csv *container_id*:/opt
 docker cp raw_payments.csv *container_id*:/opt
 ```
 
-## Connect Spark Container
+### Connect Spark container
 ```shell
 docker-exec -it <container_id> bash
 ```
 
-## Run Beeline and Connect Hive
+### Run beeline and connect hive
 ```shell
 /usr/spark/bin/beeline
 ```
@@ -100,7 +100,7 @@ Transaction isolation: TRANSACTION_REPEATABLE_READ
 0: jdbc:hive2://localhost:10000>
 ```
 
-## Create tables using csv files
+### Create tables using csv files
 ```shell
 CREATE TABLE default.raw_customers (
     id int,
@@ -135,7 +135,7 @@ OPTIONS (path "/opt/raw_payments.csv",
         header "true");
 ```
 
-## Create venv in your local machine
+### Create venv in your local machine
 
 ```shell
 python3 -m venv dbt-env
@@ -144,14 +144,14 @@ python3 -m venv dbt-env
 source dbt-env/bin/activate
 ```
 
-## Install DBT 
+### Install dbt
 ```shell
 pip install "dbt-spark[PyHive]"
 ```
 Note: sasl installation can be problem when installing the package.
 If you are using linux you can follow the steps [here](https://stackoverflow.com/questions/70347149/installing-sasl-in-python).
 
-## Initilize and configure dbt
+### Initilize and configure dbt
 
 ```shell
 dbt init tutorial_spark
@@ -161,7 +161,7 @@ dbt init tutorial_spark
 
 After configuration, a folder system will be created.
 
-## Check configuration using debug
+### Check configuration using debug
 ```shell
 cd tutorial_spark
 ```
@@ -171,20 +171,20 @@ cd dbt debug
 
 ![dbt_debug_1](images/dbt_debug_1.png)
 
-## Create sql and yml files for transformation
+### Create sql and yml files for transformation
 
 Visit https://github.com/dbt-labs/jaffle_shop and get the "models" folder from there and copy the files into your **tutorial_spark/models** folder.
 
 ![models_1](./images/models_1.png)
 
-## Run dbt
+### Run dbt
 
 ```shell
 dbt run
 ```
 ![dbt_run_1](./images/dbt_run_1.png)
 
-## Create dbeaver connection and check the data easily
+### Create dbeaver connection and check the data easily
 
 Download Dbeaver https://dbeaver.io/download/
 
@@ -195,7 +195,7 @@ Download Dbeaver https://dbeaver.io/download/
 ![dbeaver_3](./images/dbeaver_3.png)
 
 
-# Resources
+## Resources
 - What is dbt?: https://docs.getdbt.com/docs/introduction
 - Apache Spark Setup for dbt: https://docs.getdbt.com/docs/core/connect-data-platform/spark-setup
 - Configuration and Properties of dbt: https://docs.getdbt.com/reference/configs-and-properties
